@@ -3,7 +3,7 @@ CFLAGS=-Wall
 SYNCOBJ=pe_sync.o
 EXTLIBS=-lpthread -lrt
 
-all: readers_writers_test one_slot_buffer_test child_care_test
+all: readers_writers_test one_slot_buffer_test child_care_test monkey_crossing_test
 
 part1: readers_writers_test one_slot_buffer_test
 part2: child_care_test
