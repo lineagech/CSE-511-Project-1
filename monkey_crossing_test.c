@@ -29,10 +29,11 @@ void create_monkey_threads(int n_east_monkeys, int n_west_monkeys,
         e_ti[i]->op_name = EAST_CROSSING;
         pthread_create(&east_monkey_t[i], NULL, _handle_thread, e_ti[i]);
     }
+    c_thread = 0;
     for(i=0;i<n_west_monkeys;i++) {
         w_ti[i] = malloc(sizeof(_thread_info_t));
         w_ti[i]->start_time = w_arr_time[c_thread];
-        w_ti[i]->tid = c_thread++;
+        w_ti[i]->tid = n_east_monkeys + c_thread++;
         w_ti[i]->exec_time = 1;
         w_ti[i]->op_name = WEST_CROSSING;
         pthread_create(&west_monkey_t[i], NULL, _handle_thread, w_ti[i]);
@@ -69,9 +70,10 @@ int main(int argc, char* argv[])
 
   while(n_test_cases > 0) {
     int n_west_monkeys, n_east_monkeys, w_arr_time[10], e_arr_time[10];
-    scanf("%d", &n_west_monkeys);
     scanf("%d", &n_east_monkeys);
-
+    scanf("%d", &n_west_monkeys);
+    
+    printf("%d east monkeys and %d west monkeys\n", n_east_monkeys, n_west_monkeys);
     for(i=0;i<n_east_monkeys;i++)
       scanf("%d", &e_arr_time[i]);
     for(i=0;i<n_west_monkeys;i++)
