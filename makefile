@@ -1,17 +1,17 @@
 CC=gcc
-CFLAGS=-Wall
+CFLAGS=-Wall -std=gnu11
 SYNCOBJ=pe_sync.o
-EXTLIBS=-lpthread -lrt
+EXTLIBS=-pthread -lrt
 
 all: readers_writers_test one_slot_buffer_test child_care_test monkey_crossing_test
 
-part1: readers_writers_test one_slot_buffer_test
-part2: child_care_test
+debug: CFLAGS += -DDEBUG -g
+debug: all
 
 clean:
 	rm -f *.o *.bin
 
-.PHONY: all clean
+.PHONY: all debug clean
 
 %.o: %.c %.h
 	$(CC) $(CFLAGS) -c -o $@ $<
